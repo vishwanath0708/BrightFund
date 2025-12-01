@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Apply for Scholarship - BrightFund</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #f3f4ff, #e7ebff);
+            animation: fadeIn 1.2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+
+        .banner {
+            width: 100%;
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #b9c4ff, #d7d9ff);
+            color: #2f2957;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            animation: slideDown 1s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .banner h1 { margin: 0; font-size: 40px; font-weight: 600; }
+        .banner p { margin-top: 10px; font-size: 18px; opacity: 0.9; }
+
+        .section-title {
+            font-size: 26px;
+            font-weight: 600;
+            color: #443d7a;
+            margin-bottom: 10px;
+            animation: fadeSlide 1.2s ease-out;
+        }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .eligibility-list {
+            padding-left: 20px;
+            line-height: 28px;
+            font-size: 17px;
+            color: #4d4d61;
+            animation: fadeSlide 1.4s ease-out;
+        }
+
+        form {
+            margin-top: 35px;
+            animation: fadeSlide 1.6s ease-out;
+        }
+
+        label { font-weight: 600; color: #36325a; }
+        .form-group { margin-bottom: 22px; }
+
+        input, textarea {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid #cfd2ff;
+            background: rgba(255,255,255,0.85);
+            font-size: 16px;
+            transition: 0.25s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #8c87ff;
+            box-shadow: 0 0 6px rgba(102, 95, 255, 0.35);
+            background: white;
+            outline: none;
+            transform: scale(1.02);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #7873ff, #a29dff);
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+            box-shadow: 0 4px 14px rgba(97, 92, 255, 0.25);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #6963f4, #8f89ff);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(97, 92, 255, 0.35);
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Header fragment -->
+<div th:replace="fragments/header :: header"></div>
+
+<!-- Banner -->
+<div class="banner">
+    <h1>Apply for Scholarship</h1>
+    <p>Your future deserves a chance — fill the form below</p>
+</div>
+
+<div class="container">
+
+    <!-- Eligibility -->
+    <h2 class="section-title">Eligibility Criteria</h2>
+    <ul class="eligibility-list">
+        <li>Must be a currently enrolled student.</li>
+        <li>Family income below ₹8,00,000 per year.</li>
+        <li>Minimum 70% marks in previous year.</li>
+        <li>Should not be receiving any major scholarship.</li>
+    </ul>
+
+    <!-- Form -->
+    <h2 class="section-title" style="margin-top: 40px;">Application Form</h2>
+
+    <form th:action="@{/submitApplication}" th:object="${student}" method="POST">
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" th:field="*{name}" placeholder="Enter your full name">
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" th:field="*{email}" placeholder="example@gmail.com">
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" th:field="*{phone}" placeholder="Enter your phone number">
+        </div>
+
+        <div class="form-group">
+            <label>Course</label>
+            <input type="text" th:field="*{course}" placeholder="B.Tech, B.Sc, Diploma etc.">
+        </div>
+
+        <div class="form-group">
+            <label>Semester</label>
+            <input type="number" th:field="*{semester}" placeholder="Enter your current semester">
+        </div>
+
+        <div class="form-group">
+            <label>Address</label>
+            <input type="text" th:field="*{address}" placeholder="Enter your Address">
+        </div>
+
+        <div class="form-group">
+            <label>Institute</label>
+            <input type="text" th:field="*{institute}" placeholder="Enter Institute name">
+        </div>
+
+        <div class="form-group">
+            <label>Institute Address</label>
+            <input type="text" th:field="*{instituteaddress}" placeholder="Enter Institute Address">
+        </div>
+
+        <div class="form-group">
+            <label>Reason for Applying</label>
+            <textarea  rows="4" placeholder="Write why you need this scholarship"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Annual Income</label>
+            <input type="number" th:field="*{income}" placeholder="Enter family income (INR)">
+        </div>
+
+        <button type="submit">Submit Application</button>
+    </form>
+</div>
+
+</body>
+</html>

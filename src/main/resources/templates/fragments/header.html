@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+<!-- HEADER FRAGMENT -->
+<div th:fragment="header">
+
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:18px 45px;
+        background:rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(10px);
+        color:#333;
+        position:sticky;
+        top:0;
+        z-index:20;
+        border-bottom:1px solid rgba(0,0,0,0.08);
+    ">
+
+        <!-- LOGO -->
+        <div style="
+            font-size:30px;
+            font-weight:700;
+            cursor:pointer;
+            color:#4e46e5;
+        "
+             onclick="window.location.href='/'">
+            BrightFund
+        </div>
+
+        <!-- NAV LINKS -->
+        <nav style="display:flex; align-items:center;">
+            <a th:href='@{/}' style="
+                margin:0 16px;
+                color:#333;
+                text-decoration:none;
+                font-size:17px;
+                padding:6px 10px;
+                border-radius:6px;
+                transition:0.2s;
+            "
+               onmouseover="this.style.background='rgba(78, 70, 229, 0.12)'"
+               onmouseout="this.style.background='transparent'">Home</a>
+
+            <a sec:authorize="!isAuthenticated()"
+               th:href='@{/apply}' style="
+                margin:0 16px;
+                color:#333;
+                text-decoration:none;
+                font-size:17px;
+                padding:6px 10px;
+                border-radius:6px;
+                transition:0.2s;
+            "
+               onmouseover="this.style.background='rgba(78, 70, 229, 0.12)'"
+               onmouseout="this.style.background='transparent'">Apply</a>
+
+            <a sec:authorize="!isAuthenticated()"
+               th:href='@{/signin}' style="
+                margin:0 16px;
+                color:#333;
+                text-decoration:none;
+                font-size:17px;
+                padding:6px 10px;
+                border-radius:6px;
+                transition:0.2s;
+            "
+               onmouseover="this.style.background='rgba(78, 70, 229, 0.12)'"
+               onmouseout="this.style.background='transparent'" >Login</a>
+
+
+            <a sec:authorize="isAuthenticated()"
+               th:href='@{/dashboard}' style="
+                margin:0 16px;
+                color:#333;
+                text-decoration:none;
+                font-size:17px;
+                padding:6px 10px;
+                border-radius:6px;
+                transition:0.2s;
+            "
+               onmouseover="this.style.background='rgba(78, 70, 229, 0.12)'"
+               onmouseout="this.style.background='transparent'" >Dashboard</a>
+
+
+
+
+            <a sec:authorize="isAuthenticated()"
+               th:href='@{/logout}' style="
+                margin:0 16px;
+                color:#333;
+                text-decoration:none;
+                font-size:17px;
+                padding:6px 10px;
+                border-radius:6px;
+                transition:0.2s;
+            "
+               onmouseover="this.style.background='rgba(78, 70, 229, 0.12)'"
+               onmouseout="this.style.background='transparent'" >Logout</a>
+
+
+
+
+
+            <a sec:authorize="!isAuthenticated()"
+               th:href='@{/about}' style="
+                margin:0 16px;
+                color:#333;
+                text-decoration:none;
+                font-size:17px;
+                padding:6px 10px;
+                border-radius:6px;
+                transition:0.2s;
+            "
+               onmouseover="this.style.background='rgba(78, 70, 229, 0.12)'"
+               onmouseout="this.style.background='transparent'">About</a>
+
+            <a th:href='@{/contact}' style="
+                margin:0 16px;
+                color:#333;
+                text-decoration:none;
+                font-size:17px;
+                padding:6px 10px;
+                border-radius:6px;
+                transition:0.2s;
+            "
+               onmouseover="this.style.background='rgba(78, 70, 229, 0.12)'"
+               onmouseout="this.style.background='transparent'">Contact</a>
+        </nav>
+
+    </div>
+
+</div>
+
+</body>
+</html>

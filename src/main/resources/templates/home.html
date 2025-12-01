@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrightFund - Scholarship Portal</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f3f5ff;
+        }
+
+        /* NAVBAR */
+
+       /* Clean, modern banner */
+        .banner {
+            height: 360px; /* reduced height for cleaner layout */
+            background-image: url('https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        /* Soft gradient overlay matching signup/login pages */
+        .banner-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+
+            background: linear-gradient(
+                135deg,
+                rgba(78, 115, 223, 0.70),   /* blue tint */
+                rgba(28, 200, 138, 0.70)    /* green tint */
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            color: white;
+            text-align: center;
+
+            backdrop-filter: blur(2px); /* modern soft effect */
+        }
+
+        /* Title */
+        .banner-overlay h1 {
+            font-size: 44px;
+            font-weight: 700;
+            margin-bottom: 10px;
+
+            animation: fadeSlide 1.2s ease-out;
+        }
+
+        /* Subtitle */
+        .banner-overlay p {
+            font-size: 18px;
+            opacity: 0.95;
+            max-width: 700px;
+            line-height: 1.5;
+
+            animation: fadeSlide 1.6s ease-out;
+        }
+
+        /* Animation */
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0px); }
+        }
+
+        .btn {
+    padding: 14px 30px;
+    margin: 10px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+
+    /* Beautiful gradient that stands out */
+    background: linear-gradient(135deg, #6a86ff, #8f54ff);
+    color: white;
+
+    box-shadow: 0 4px 14px rgba(106, 134, 255, 0.35);
+    transition: 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(143, 84, 255, 0.45);
+}
+
+
+
+        /* ABOUT SECTION */
+        .about {
+            padding: 60px 40px;
+            text-align: center;
+            background: white;
+        }
+
+        .about h2 {
+            font-size: 34px;
+            color: #333;
+        }
+
+        .about p {
+            font-size: 18px;
+            color: #555;
+            max-width: 800px;
+            margin: 15px auto;
+            line-height: 1.7;
+        }
+
+        /* FEATURES SECTION */
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 50px;
+        }
+
+        .card {
+            width: 300px;
+            padding: 25px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #ffffff, #eaf0ff);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #4338ca;
+        }
+
+        .card p {
+            color: #444;
+            font-size: 16px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(90deg, #3b82f6, #9333ea);
+            color: white;
+            padding: 18px;
+            text-align: center;
+            margin-top: 40px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div th:replace="fragments/header :: header"></div>
+
+<!-- BANNER -->
+<div class="banner">
+    <div class="banner-overlay">
+        <h1>Unlock Your Future</h1>
+        <p>BrightFund helps students access life-changing scholarship opportunities</p>
+
+        <a href="/apply" class="btn">Apply Now</a>
+    </div>
+</div>
+
+<!-- ABOUT SECTION -->
+<div class="about">
+    <h2>Why BrightFund?</h2>
+    <p>
+        We are committed to supporting students with transparent and easy-to-access scholarship programs.
+        Our platform connects meritorious and needy students with educational support that truly changes lives.
+    </p>
+</div>
+
+<!-- FEATURES SECTION -->
+<div class="features">
+    <div class="card">
+        <h3>🎓 Easy Application</h3>
+        <p>Apply for scholarships within minutes through a simple, clean and user-friendly process.</p>
+    </div>
+
+    <div class="card">
+        <h3>📄 Document Tracking</h3>
+        <p>Upload, update, and verify your scholarship documents without any confusion.</p>
+    </div>
+
+    <div class="card">
+        <h3>⭐ Transparent Results</h3>
+        <p>Instant notifications and clear merit-based results — no hidden process.</p>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    © 2025 BrightFund | Bringing Color To Your Future
+</footer>
+
+</body>
+</html>

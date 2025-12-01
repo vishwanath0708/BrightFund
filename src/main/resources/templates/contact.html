@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - BrightFund</title>
+
+    <style>
+        :root {
+            --brand-blue: #4e73df;
+            --brand-green: #1cc88a;
+            --soft-bg: #f7f9ff;
+            --text-dark: #1f2d3d;
+            --text-light: #4b5563;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: var(--soft-bg);
+            color: var(--text-dark);
+        }
+
+         .banner {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, var(--brand-blue), var(--brand-green));
+            color: white;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .banner h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: 700;
+            animation: fadeSlide 1.2s ease-out;
+        }
+
+        .banner p {
+            margin-top: 10px;
+            font-size: 18px;
+            opacity: 0.95;
+            animation: fadeSlide 1.6s ease-out;
+        }
+
+        /* Animation */
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Layout */
+        .container {
+            max-width: 850px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        /* Clean real website form style */
+        form {
+            margin-bottom: 40px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 15px;
+            border: 1px solid #d4d9e6;
+            background: white;
+            margin-bottom: 18px;
+            transition: all 0.25s ease;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--brand-blue);
+            box-shadow: 0 0 8px rgba(78, 115, 223, 0.25);
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        /* Matching button from Apply page */
+        .btn-primary {
+            padding: 14px 26px;
+            background: linear-gradient(135deg, var(--brand-blue), var(--brand-green));
+            border: none;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 6px 18px rgba(78,115,223,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(28,200,138,0.35);
+        }
+
+        /* Contact Info Section */
+        .contact-info {
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 2px solid #e1e6f2;
+        }
+
+        .contact-info h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--brand-blue);
+        }
+
+        .info-item {
+            margin-bottom: 18px;
+            font-size: 16px;
+            color: var(--text-light);
+        }
+
+        .info-item strong {
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+           /* Animation */
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0px); }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- Header -->
+<div th:replace="fragments/header :: header"></div>
+
+<!-- Banner -->
+<div class="banner">
+    <h1>Contact BrightFund</h1>
+    <p>Have questions? We're here to help you.</p>
+</div>
+
+<div class="container">
+
+    <!-- Clean Real Website Form -->
+    <form th:action="@{/getcontact}" method="post">
+        <label>Your Name</label>
+        <input type="text" name="name" placeholder="Enter your name" required>
+
+        <label>Your Email</label>
+        <input type="email" name="email" placeholder="Enter your email" required>
+
+        <label>Your Message</label>
+        <textarea name="message" placeholder="Write your message..." required></textarea>
+
+        <button class="btn-primary" type="submit">Send Message</button>
+    </form>
+
+    <!-- Contact Info Below Form -->
+    <div class="contact-info">
+        <h2>Our Contact Information</h2>
+
+        <div class="info-item">
+            <strong>Email:</strong> support@brightfund.org
+        </div>
+
+        <div class="info-item">
+            <strong>Phone:</strong> +91 9876543210
+        </div>
+
+        <div class="info-item">
+            <strong>Address:</strong> Bengaluru, Karnataka, India
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

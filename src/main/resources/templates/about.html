@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - BrightFund</title>
+
+    <style>
+        :root {
+            --brand-blue: #4e73df;
+            --brand-green: #1cc88a;
+            --soft-bg: #f7f9ff;
+            --text-dark: #1f2d3d;
+            --text-light: #4b5563;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--soft-bg);
+            color: var(--text-dark);
+        }
+
+        /* ----- NAVBAR ----- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        /* ----- BANNER ----- */
+        .banner {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, var(--brand-blue), var(--brand-green));
+            color: white;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .banner h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: 700;
+            animation: fadeSlide 1.2s ease-out;
+        }
+
+        .banner p {
+            margin-top: 10px;
+            font-size: 18px;
+            opacity: 0.95;
+            animation: fadeSlide 1.6s ease-out;
+        }
+
+        /* Animation */
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn {
+            padding: 14px 30px;
+            margin-top: 15px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            background: linear-gradient(135deg, #6a86ff, #8f54ff);
+            color: white;
+            box-shadow: 0 4px 14px rgba(106, 134, 255, 0.35);
+            transition: 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(143, 84, 255, 0.45);
+        }
+
+        /* ----- ABOUT SECTION ----- */
+        .about {
+            padding: 60px 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about h2 {
+            font-size: 34px;
+            color: var(--text-dark);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .about p {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 15px auto;
+            line-height: 1.7;
+        }
+
+        .mission, .values, .impact {
+            margin-top: 50px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: var(--brand-blue);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* ----- IMAGE GRID ----- */
+        .image-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .image-row img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .image-row img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+
+        @media(max-width: 960px){
+            .image-row img {
+                width: 90%;
+                height: auto;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div th:replace="fragments/header :: header"></div>
+
+<!-- BANNER -->
+<div class="banner">
+    <h1>About BrightFund</h1>
+    <p>Empowering students through scholarships to achieve their dreams</p>
+</div>
+
+<!-- ABOUT SECTION -->
+<div class="about">
+    <h2>Why BrightFund?</h2>
+    <p>
+        BrightFund is a student-centered scholarship platform dedicated to supporting talented
+        and financially challenged students across India. Our platform ensures no deserving student misses educational opportunities.
+    </p>
+
+    <!-- Mission -->
+    <div class="mission">
+        <h3 class="section-title">Our Mission</h3>
+        <p>
+            Connect deserving students with scholarships in a transparent, fast, and reliable way,
+            enabling them to pursue higher education without financial barriers.
+        </p>
+    </div>
+
+    <!-- Values -->
+    <div class="values">
+        <h3 class="section-title">Our Values</h3>
+        <p>Integrity, Transparency, Commitment, and Student Empowerment are at the core of everything we do.</p>
+    </div>
+
+    <!-- Impact -->
+    <div class="impact">
+        <h3 class="section-title">Our Impact</h3>
+        <p>
+            Since inception, BrightFund has helped thousands of students achieve their educational dreams.
+            By connecting donors, institutions, and students, we reduce dropout rates and support underprivileged communities.
+        </p>
+    </div>
+
+    <!-- IMAGE GRID -->
+    <div class="image-row">
+        <img src="https://images.unsplash.com/photo-1596495577886-d920f1fbf233?auto=format&fit=crop&w=800&q=80" alt="Student Studying">
+        <img src="https://images.unsplash.com/photo-1584697964204-1b34e44d3b23?auto=format&fit=crop&w=800&q=80" alt="Scholarship Discussion">
+        <img src="https://images.unsplash.com/photo-1564869739437-d0f4b5b85b07?auto=format&fit=crop&w=800&q=80" alt="Happy Student">
+    </div>
+</div>
+
+</body>
+</html>

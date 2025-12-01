@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semester Results & Fee Receipts</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        :root {
+            --brand-blue: #4e73df;
+            --brand-green: #1cc88a;
+            --soft-bg: #f7f9ff;
+            --text-dark: #1f2d3d;
+            --text-light: #4b5563;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: var(--soft-bg);
+            color: var(--text-dark);
+        }
+
+        /* ----- BANNER ----- */
+        .banner {
+            padding: 60px 20px; /* taller banner */
+            background: linear-gradient(135deg, var(--brand-blue), var(--brand-green));
+            color: white;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        .banner h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: 700;
+            animation: fadeSlide 1.2s ease-out;
+        }
+
+        .banner p {
+            margin-top: 10px;
+            font-size: 18px;
+            opacity: 0.95;
+            animation: fadeSlide 1.6s ease-out;
+        }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-weight: 600;
+        }
+
+        table th, table td {
+            vertical-align: middle !important;
+        }
+
+        .card {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 12px;
+        }
+
+        .btn-primary {
+            background-color: #1cc88a;
+            border: none;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            background-color: #17a673;
+        }
+
+        .alert {
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        /* FLASH MESSAGE */
+        #message {
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            animation: fadeIn 0.6s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+
+    <script>
+        // Hide messages after 5 seconds
+        function hideMessage() {
+            const msg = document.getElementById('message');
+            if(msg) {
+                setTimeout(() => { msg.style.display = 'none'; }, 5000);
+            }
+        }
+        window.onload = hideMessage;
+    </script>
+</head>
+<body class="bg-light">
+
+<!-- Navbar -->
+<div th:replace="fragments/header :: header"></div>
+
+<!-- Banner -->
+<div class="banner">
+    <h1>Semester Results & Fee Receipts</h1>
+    <p>View and upload your academic results and fee receipts easily</p>
+</div>
+
+<div class="container">
+
+    <!-- Flash Message -->
+    <div th:if="${message}" id="message" class="alert"
+         th:classappend="${success} ? 'alert-success' : 'alert-danger'" role="alert">
+        <span th:text="${message}"></span>
+    </div>
+
+    <!-- Upload Result Form -->
+    <div class="card mb-5 p-4">
+        <h4 class="mb-3">Upload Semester Result</h4>
+        <form th:action="@{/uploadResult}" method="post" enctype="multipart/form-data">
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="semester" class="form-label">Select Semester</label>
+                    <select class="form-select" name="semester" id="semester" required>
+                        <option value="" disabled selected>Select semester</option>
+                        <option th:each="i : ${#numbers.sequence(1, sem)}"
+                                th:value="${i}" th:text="'Semester ' + ${i}"></option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="file" class="form-label">Upload Result File</label>
+                    <input type="file" class="form-control" id="file" name="file" required>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">Upload</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Uploaded Results -->
+    <div class="card mb-5 p-4">
+        <h4 class="mb-3">Uploaded Results</h4>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle">
+                <thead class="table-dark">
+                <tr>
+                    <th>Semester</th>
+                    <th>File</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="entry : ${semesterResults}">
+                    <td th:text="${entry.key}"></td>
+                    <td>
+                        <span th:if="${entry.value != null}">
+                            <a th:href="@{/files/{file}(file=${entry.value.fileName})}"
+                               th:text="${entry.value.fileName}" target="_blank"></a>
+                        </span>
+                        <span th:if="${entry.value == null}">Not Uploaded</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Upload Fee Receipt Form -->
+    <div class="card mb-5 p-4">
+        <h4 class="mb-3">Upload Fee Receipt</h4>
+        <form th:action="@{/uploadReceipt}" method="post" enctype="multipart/form-data">
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="year" class="form-label">Select Year</label>
+                    <select class="form-select" name="year" id="year" required>
+                        <option value="" disabled selected>Select year</option>
+                        <option th:each="i : ${#numbers.sequence(1, year)}"
+                                th:value="${i}" th:text="'Year ' + ${i}"></option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="feeFile" class="form-label">Upload Fee Receipt</label>
+                    <input type="file" class="form-control" id="feeFile" name="feeFile" required>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">Upload</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Fee Receipts -->
+    <div class="card mb-5 p-4">
+        <h4 class="mb-3">Fee Receipts</h4>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle">
+                <thead class="table-dark">
+                <tr>
+                    <th>Year</th>
+                    <th>Receipt</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="entry : ${feeReceipts}">
+                    <td th:text="${entry.key}"></td>
+                    <td>
+                        <span th:if="${entry.value != null}">
+                            <a th:href="@{/receipts/{file}(file=${entry.value.fileName})}"
+                               th:text="${entry.value.fileName}" target="_blank"></a>
+                        </span>
+                        <span th:if="${entry.value == null}">Not Available</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
