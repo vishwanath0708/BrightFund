@@ -1,6 +1,6 @@
 # BrightFund
 
-**BrightFund** is a comprehensive scholarship management system built using **Java**, **Spring Framework**, and **MySQL/PostgreSQL**.  
+**BrightFund** is a comprehensive scholarship management system built using **Java**, **Spring Framework**, and **PostgreSQL**.  
 It helps students apply for scholarships, track fee receipts, and upload required documents, while admins can manage applications and generate reports.  
 
 ## Features
